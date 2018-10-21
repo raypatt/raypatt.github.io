@@ -36,22 +36,22 @@ a:active {
 td.image {
 	width: auto;
 	height: auto;
-	padding: .6em;
+	padding: 1vw;
 }
 img.image {
-	width:10em;
-	height:10em;
+	width:13vw;
+	height:auto;
 	display: block;
-    margin-left: auto;
-    margin-right: auto;
+	margin-right: -1vw;
 }
 .title {
-	margin-top: 0%;
+	margin-top: 1%;
 	margin-bottom: 0%;
-	margin-left: 2.5%;
-	text-align: left;
+	padding-left: 5vw;
+	padding-right: 5vw;
+	text-align: center;
 	font-family: helvetica;
-	font-size: 2.3em;
+	font-size: 3vw;
 	letter-spacing: .5em;
 	word-spacing: -.5em;
 	color: white;
@@ -61,19 +61,12 @@ img.image {
 	font-variant: small-caps;
 	text-transform: uppercase;
 }
-td.links { 
-	padding-left: 0px;
-	padding-right: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
-}
+
 .links {
 	margin-top: 1%;
 	margin-bottom: 0%;
-	padding-left: 2%;
-	padding-right: 2%;
 	font-family: verdana;
-	font-size: 1em;
+	font-size: 1.3vw;
 	letter-spacing: .3em;
 	word-spacing: -.3em;
 	color: white;
@@ -89,7 +82,7 @@ td.links {
 	margin-left:auto;
 	margin-right:auto;
 	margin-top: 1%;
-	width: 78%;
+	width: 70%;
 }
 
 button {
@@ -104,7 +97,6 @@ button {
 
 
 .button:hover {
-	padding:5px;
 	background-color: rgba(255,255,255,.3);
 }
 
@@ -131,13 +123,14 @@ button {
 }
 
 p.bodyTitle { 
-	font-size: 1.5em;
+	line-height:2.3vw;
+	font-size: 2vw;
 	font-family: verdana;
 	text-align: center
 }
 
 p.bodySubTitle { 
-	font-size: 1.2em;
+	font-size: 1.6vw;
 	text-align: center;
 	font-family: verdana;
 	font-style: italic;
@@ -148,9 +141,9 @@ div.body {
 	padding:3%;
 	text-align: left;
 	font-family: arial;
-	font-size: 1em;
+	font-size: 1.3vw;
 	color: white;
-	line-height: 1.5em;
+	line-height: 1.5vw;
 	font-weight: none;
 	word-spacing: .05em;
 	text-decoration: none;
