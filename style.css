@@ -144,6 +144,7 @@ p.bodySubTitle {
 }
 
 div.body {
+	margin-top: 3%;
 	padding:3%;
 	text-align: left;
 	font-family: arial;
