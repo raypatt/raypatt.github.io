@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<script>
+		var mainName = "Main";
+		function research() {
+  	 	 	var z = document.getElementById("Research");
+  	 	 	var x = document.getElementById(mainName);
+  	 	 	z.style.display="block";
+  	 	 	x.style.opacity = "0";
+  	 	 	setTimeout(function(){ x.style.display="none";
+  	 	 		z.style.opacity = "1";
+  	 	 		mainName = "Research";
+  	 	 	}, 125);
+  	 	 	
+  	 	 	
+  	 	 }
+		function main() {
+  	 	 	var z = document.getElementById("Main");
+  	 	 	var x = document.getElementById(mainName);
+  	 	 	z.style.display="block";
+  	 	 	x.style.opacity = "0";
+  	 	 	setTimeout(function(){ x.style.display="none";
+  	 	 		z.style.opacity = "1";
+  	 	 		mainName = "Main";
+  	 	 	}, 125);
+  	 	 	
+  	 	 }
+  	 	 function bln() {
+  	 	 	var z = document.getElementById("BLN");
+  	 	 	var x = document.getElementById(mainName);
+  	 	 	z.style.display="block";
+  	 	 	x.style.opacity = "0";
+  	 	 	setTimeout(function(){ x.style.display="none";
+  	 	 		z.style.opacity = "1";
+  	 	 		mainName = "BLN";
+  	 	 	}, 125);
+  	 	 	
+  	 	 }
+	</script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<p id="test"> </p>
+<table class="center bg">
+	<tr>
+		<td class="image">
+			<img src="Picture.png" class="image" onclick="main()">
+		</td>
+		<td>
+			<table>
+				<tr>
+					<p class="title"> raymond patt </p>
+					
+				</tr>
+				<tr>
+					<div class="bg">
+					<p class="links"> 
+						<table class="links" style="width:100%">
+							<tr>
+								<td class="links">
+									<button class="button links"> <a href="second.html">Research </button>
+								</td> 
+								<td class="links">
+									<button class="button links" onclick="bln()"> Buckeye Language Network </button>
+								</td>
+								<td class="links">
+									<button class="button links" onclick="bln()"> Neuro- ambassador </button>
+								</td>
+								<td class="links">
+									<button class="button links"> Personal </button>
+								</td>
+							</tr>
+						</table>
+					</p>
+					</div>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<div id="Main" class="center bg Main second">
+	
+		<h1> <center> <p style="text-align:center" id="title">  RESEARCH  </p> </center> </h1>
+			<p id="body">
+				&nbsp; On this page I'm going to talk a lot about my difference experiences with research, why I find it interesting, and projects which I have worked on. 
+
+</div> 
+
+	<div class ="bg center CLA">
+		<h1> <center> <p style="text-align:center" id="title">  RESEARCH  </p> </center> </h1>
+			<p id="body">
+				&nbsp; On this page I'm going to talk a lot about my difference experiences with research, why I find it interesting, and projects which I have worked on. 
+	
+	</div>
+
+</p>
+</div>
+
+</body>
+</html>

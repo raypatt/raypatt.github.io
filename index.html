@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<script>
+		var mainName = "Main";
+		function research() {
+  	 	 	var z = document.getElementById("Research");
+  	 	 	var x = document.getElementById(mainName);
+  	 	 	z.style.display="block";
+  	 	 	x.style.opacity = "0";
+  	 	 	setTimeout(function(){ x.style.display="none";
+  	 	 		z.style.opacity = "1";
+  	 	 		mainName = "Research";
+  	 	 	}, 125);
+  	 	 	
+  	 	 	
+  	 	 }
+		function main() {
+  	 	 	var z = document.getElementById("Main");
+  	 	 	var x = document.getElementById(mainName);
+  	 	 	z.style.display="block";
+  	 	 	x.style.opacity = "0";
+  	 	 	setTimeout(function(){ x.style.display="none";
+  	 	 		z.style.opacity = "1";
+  	 	 		mainName = "Main";
+  	 	 	}, 125);
+  	 	 	
+  	 	 }
+  	 	 function bln() {
+  	 	 	var z = document.getElementById("BLN");
+  	 	 	var x = document.getElementById(mainName);
+  	 	 	z.style.display="block";
+  	 	 	x.style.opacity = "0";
+  	 	 	setTimeout(function(){ x.style.display="none";
+  	 	 		z.style.opacity = "1";
+  	 	 		mainName = "BLN";
+  	 	 	}, 125);
+  	 	 	
+  	 	 }
+	</script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<p id="test"> </p>
+<table class="center bg">
+	<tr>
+		<td class="image">
+			<img src="Picture.png" class="image" onclick="main()">
+		</td>
+		<td>
+			<table>
+				<tr>
+					<p class="title"> raymond patt </p>
+					
+				</tr>
+				<tr>
+					<div class="bg">
+					<p class="links"> 
+						<table class="links" style="width:100%">
+							<tr>
+								<td class="links">
+									<button class="button links"> <a href="second.html">Research </button>
+								</td> 
+								<td class="links">
+									<button class="button links" onclick="bln()"> Buckeye Language Network </button>
+								</td>
+								<td class="links">
+									<button class="button links" onclick="bln()"> Neuro- ambassador </button>
+								</td>
+								<td class="links">
+									<button class="button links"> Personal </button>
+								</td>
+							</tr>
+						</table>
+					</p>
+					</div>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<div id="Main" class="bg center Main second">
+	<h1> <center> <p style="text-align:center" id="title">  ABOUT ME  </p> </center> </h1>
+		<p id="body">
+		&nbsp; Hello! As you can tell from the massive writing up above, my name is Raymond Patt, or just Ray! I am an undergraduate student at The Ohio State University studying Neuroscience and Linguistics with a focus in cognitive/computational methods. Due to the nature of my coursework, I'll also be getting a minor in computer and information sciences along the way! One of my primary interests is Language; I've been encapsulated by it for years. As a kid I used to spend hours on end looking up languages resources-- for languages I didn't even plan on learning! I loved having the wealth of my knowledge at my disposal, and constantly pushed those around me to learn the language that entranced me that week. (This week I'm interested in <b> <i> Nahuatl </b> </i>!) More specifically, I am interested in how we can use computers, especially Artificial Intelligence, to aid in second language acquisition and testing. 
+	</p>
+</div>
+
+
+
+</body>
+</html>
