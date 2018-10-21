@@ -45,6 +45,7 @@ img.image {
 	margin-right: -1vw;
 }
 .title {
+	width:48vw;
 	margin-top: 1%;
 	margin-bottom: 0%;
 	padding-left: 5vw;
@@ -82,7 +83,7 @@ img.image {
 	margin-left:auto;
 	margin-right:auto;
 	margin-top: 1%;
-	width: 70%;
+	width: 70vw;
 }
 
 button {
@@ -137,8 +138,8 @@ p.bodySubTitle {
 }
 
 div.body {
-	margin-top: 3%;
-	padding:3%;
+	margin-top: 2%;
+	padding:2%;
 	text-align: left;
 	font-family: arial;
 	font-size: 1.3vw;
