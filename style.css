@@ -6,15 +6,16 @@ body {
     background-size: 100%;
 }
 
-img.bln { 
-	width: 15vw;
-	position: center;
-	-webkit-transition-duration: 0.4s; /* Safari */
- 	transition-duration: 0.4s;
-}
-img.bln:hover {
-	width: 50vw;
-}
+
+	img.bln { 
+		width: 15vw;
+		position: center;
+		-webkit-transition-duration: 0.4s; /* Safari */
+	 	transition-duration: 0.4s;
+	}
+	img.bln:hover {
+		width: 50vw;
+	}
 
 .bg {
 	background-color: rgba(85, 85, 85, .65);
