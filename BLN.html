@@ -38,6 +38,56 @@
   	 	 	}, 125);
   	 	 	
   	 	 }
+  	 	function showBLNPics() {
+    		var i0 = document.getElementById("blnImage");
+    		var i1 = document.getElementById("blnImage1");
+    		var i2 = document.getElementById("blnImage2");
+    		var i3 = document.getElementById("blnImage3");
+    		var i4 = document.getElementById("blnImage4");
+    		var i5 = document.getElementById("blnImage5");
+    		var i6 = document.getElementById("blnImage6");
+    		if (i0.style.display === "none") {
+     		   document.getElementById("BLNButton").innerHTML = "Hide Application Pictures";
+     		   i0.style.display = "inline";
+     		   i1.style.display = "inline";
+     		   i2.style.display = "inline";
+     		   i3.style.display = "inline";
+     		   i4.style.display = "inline";
+     		   i5.style.display = "inline";
+     		   i6.style.display = "inline";
+  			} 
+  			else {
+      		  document.getElementById("BLNButton").innerHTML = "Show Application Pictures";
+      		  i0.style.display = "none";
+      		  i1.style.display = "none";
+      		  i2.style.display = "none";
+      		  i3.style.display = "none";
+      		  i4.style.display = "none";
+      		  i5.style.display = "none";
+      		  i6.style.display = "none";
+      		}
+      	}
+      	function showSheetsPics() {
+    		var i0 = document.getElementById("sheets");
+    		var i1 = document.getElementById("sheets1");
+    		var i2 = document.getElementById("sheets2");
+    		var i3 = document.getElementById("sheets3");
+    		if (i0.style.display === "none") {
+     		   document.getElementById("SheetsButton").innerHTML = "Hide Google Sheets Pictures";
+     		   i0.style.display = "inline-block";
+     		   i1.style.display = "inline-block";
+     		   i2.style.display = "inline-block";
+     		   i3.style.display = "inline-block";
+  			} 
+  			else {
+
+      		  document.getElementById("SheetsButton").innerHTML = "Show Google Sheets Pictures";
+      		  i0.style.display = "none";
+      		  i1.style.display = "none";
+      		  i2.style.display = "none";
+      		  i3.style.display = "none";
+      		}
+  	  }	
 	</script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -88,7 +138,7 @@
 		</td>
 	</tr>
 </table>
-	<div class ="bg center body">
+	<div class ="bg center body" style="padding-bottom:0px">
 		<center>
 			<p class=bodyTitle id="title">  
 				<b> Data Collection Application </b>
@@ -98,22 +148,51 @@
 			</p>
 			
 		</center>
-		<p id="body" style="position: center">
-			<center>
-					<img src="BLN/1.png" class="bln">
-					<br>
-					<img src="BLN/2.png" class="bln">
-					<br>
-					<img src="BLN/3.png" class="bln">
-					<br>
-					<img src="BLN/4.png" class="bln">
-					<br>
-					<img src="BLN/5.png" class="bln">
-					<br>
-					<img src="BLN/1.png" class="bln"> 
-			</center>
+		<p>
+			&nbsp; Dr. Laura Wagner and other researchers make use of COSI every day to gather data from a large pool of subjects. The only limiting factors for the researchers is the need to personally talk to people and the attention span of 4-7 year old children. In a perfect world we could get all 4-7 year old children to engage in the experiment, but that&#39;s just not feasible. What is feasible on the other hand, is making the process of collecting data faster. I have been working to develop an iPad application using the Swift programming language to collect data in the middle of COSI, without needing to take parents and children from the experience. In fact, Dr. Laura Wagner and I hope to get the iPad a standalone  exhibit so anyone walking by can take part in an experiment&mdash;	even without a researcher begging! 
 		</p>
-	
+		<p>
+			&nbsp; While anyone could create an application for data collection, I am hoping to make this application accessible to researchers outside of the Language Science Research Center, outside of the Buckeye Language Network, and hopefully even outside of The Ohio State University. To do so I have been making the experimental information (introductory questions, consent information, experimental design, independent and dependent variable measures, and the data collected) entirely customizable and accessible through a Google Sheet. This will allow researchers to collaborate on a single experiment without needing to share and constantly update shared files, and more importantly makes the application being run accessible to anyone with a Google Sheet file! The ultimate goal, however, is to only use Google Sheets as a back-end platform for data storage, and to have a desktop application logged into your Google account which can modify and access the experiment. 
+		</p>
+		<p>
+			&nbsp; Currently, we are a long way from creating a tool connecting COSI to an international network of researchers. However, we are beginning to implement the application into the data collection process at COSI. This November, we will be performing a pilot study done entirely with the application. After that, we will begin to test it&#39;s ability for modification for a follow-up experiment. Finally, once we have been able to successfully make use of the entire application, we hope to push it out to other researchers within the Buckeye Language Network. 
+		</p>
+		<br>
+		<p>
+		<center>
+			<button id="BLNButton" style ="width:25vw" class="button links" onclick="showBLNPics()"> 
+					Show Application Pictures 
+			</button>
+			<button id="SheetsButton" style ="width:25vw" class="button links" onclick="showSheetsPics()"> 
+					Show Google Sheets Pictures 
+			</button>
+		</center>
+		</p>
+		<div id="blnPics">
+			<center>
+					<img src="BLN/1.png" class="bln" id="blnImage">
+					<img src="BLN/2.png" class="bln" id="blnImage1">
+					<br>
+					<img src="BLN/3.png" class="bln" id="blnImage2">
+					<img src="BLN/4.png" class="bln" id="blnImage3">
+					<br>
+					<img src="BLN/5.png" class="bln" id="blnImage4">
+					<img src="BLN/1.png" class="bln" id="blnImage5"> 
+			</center>
+		</div>
+
+		<div id="sheetsPics">
+			<center>
+				<img src="BLN/Data.png" class="bln" id="sheets">
+				<br>
+				<img src="BLN/IntroQuestions.png" class="bln" id="sheets1">
+				<br>
+				<img src="BLN/Dependents.png" class="bln" id="sheets2">
+				<br>
+				<img src="BLN/TestSettings.png" class="bln" id="sheets3">
+				<br>
+			</center>
+		</div>
 	</div>
 
 	<div class ="bg center body">

@@ -7,14 +7,15 @@ body {
 }
 
 
-	img.bln { 
-		width: 15vw;
-		position: center;
+img.bln { 
+		width:15vw;
+		display: none;
+		max-width: 100%
 		-webkit-transition-duration: 0.4s; /* Safari */
 	 	transition-duration: 0.4s;
 	}
 	img.bln:hover {
-		width: 50vw;
+		width: 70vw;
 	}
 
 .bg {
