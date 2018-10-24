@@ -3,7 +3,8 @@ body {
 	background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    background-size: 100%;
+    background-width: 100vw;
+    background-height:auto;
 }
 
 
