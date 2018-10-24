@@ -111,7 +111,7 @@ img.image {
 	width: 70vw;
 }
 
-button {
+.button {
 	background-color:transparent;
   color: white;
   border:none;
