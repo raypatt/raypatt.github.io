@@ -97,6 +97,21 @@ img.image {
 	text-transform: uppercase;
 
 }
+
+.xplorers {
+	padding: 5vw;
+	background-size:20vw;
+	background-image: url("Xplorers.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+.buckeye {
+	padding: 15px;
+	background-size:25vw;
+	background-image: url("buckeye.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+}
 .bgimage {
 	background-image: url("BLN.jpg");
 	background-size: 20vw;
