@@ -94,6 +94,7 @@
 							correct++;
 						}
 						else {
+							
 							wrongAnswers1.push(i);
 						}
 					}
@@ -104,6 +105,7 @@
 							correct++;
 						}
 						else {
+							
 							wrongAnswers1.push(i);
 						}
 					}
@@ -114,6 +116,7 @@
 							correct++;
 						}
 						else {
+							
 							wrongAnswers1.push(i);
 						}
 					}
@@ -322,7 +325,7 @@
 
 			document.getElementById("CONTAINER").innerHTML = document.getElementById("Thank_You_Container").innerHTML;
 
-			document.getElementById("Analysis").innerHTML = "You got " + totalCorrect + "/16 correct!";
+			document.getElementById("Analysis").innerHTML = "You got " + totalCorrect + "/18 correct!";
 
 			var wrongAnswerAnalysis = "You got the following answers wrong: <br> <br>";
 
@@ -357,8 +360,11 @@
 					index++;
 				}
 
+				wrongAnswerAnalysis+= "Comics you saw, in order: <br> <br>";
+
+				document.getElementById("IMG1").src = "1" + levels[0] + ".png";
+
 			}
-			alert(wrongAnswerAnalysis);
 			document.getElementById("Analysis1").innerHTML = wrongAnswerAnalysis;
 
 		}
@@ -543,6 +549,11 @@
 				<p id="Analysis"> </p>
 
 				<p id="Analysis1"> </p>
+
+				<img id="IMG1" src="" style="width:50%; height:auto">
+				<img id="IMG2" src="" style="width:50%; height:auto">
+				<img id="IMG3" src="" style="width:50%; height:auto">
+
 			</p> 
 			
 
