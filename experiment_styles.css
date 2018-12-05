@@ -4,6 +4,12 @@
 	margin-top:5%;
 }
 
+input[type=button] {
+    width: 200;  
+    height: 150px;
+    font-size: 50px;
+}
+
 
 .centered {
   position: absolute;
