@@ -3,6 +3,8 @@
 	<meta charset="utf-8"> 
 	<script>
 		var assessment = 1;
+		var totalCorrect = 0;
+		var wrongAnswers = [];
 		var level = 1;
 		var comicName = "";
 		var email = ""; 
@@ -62,8 +64,16 @@
 
 		var level = 0;
 
+		var assessmentQuestions = [
+			assessment1s, assessment2s, assessment3s
+		];
+
 		var assessmentAnswers = [];
 
+		function correct() { 
+			
+			return correct;
+		}
 		function answerStorage() { 
 			levels.push(level);
 			var answers = [];
@@ -75,11 +85,16 @@
 			answers.push(document.querySelector('input[name="Q6"]:checked').value);
 			assessmentAnswers.push(answers);
 			correct = 0;
+
+			var wrongAnswers1 = []
 			switch(assessment) { 
 				case 1:
 					for(var i = 0; i < answers.length; i++) { 
 						if(answers[i] == assessment1c[i]) {
 							correct++;
+						}
+						else {
+							wrongAnswers1.push(i);
 						}
 					}
 					break;
@@ -88,6 +103,9 @@
 						if(answers[i] == assessment1c[i]) {
 							correct++;
 						}
+						else {
+							wrongAnswers1.push(i);
+						}
 					}
 					break;
 				case 3:
@@ -95,10 +113,12 @@
 						if(answers[i] == assessment1c[i]) {
 							correct++;
 						}
+						else {
+							wrongAnswers1.push(i);
+						}
 					}
 					break; 
 			}
-
 			<!--level down because got 2/6--> 
 			if (correct/6 <= .34) { 
 				if(level > 1) { 
@@ -111,7 +131,8 @@
 					level++;
 				}
 			}
-
+			wrongAnswers.push(wrongAnswers1);
+			totalCorrect+=correct;
 			assessment++;
 			if(assessment <=3) { showComic(); }
 			else { thankYou(); }
@@ -300,12 +321,52 @@
 			document.getElementById("gform").submit();
 
 			document.getElementById("CONTAINER").innerHTML = document.getElementById("Thank_You_Container").innerHTML;
+
+			document.getElementById("Analysis").innerHTML = "You got " + totalCorrect + "/16 correct!";
+
+			var wrongAnswerAnalysis = "You got the following answers wrong: <br> <br>";
+
+			var index = 1;
+
+			for(var i = 0; i < wrongAnswers.length; i++) {
+				var correctAnswersVals = [];
+				var correctAnswers = [];
+				var questionSentence = []; 
+
+				switch(i) {
+					case 0:
+						questionSentence = assessment1s;
+						correctAnswersVals = assessment1c;
+						correctAnswers = assessment1a;
+						break;
+					case 1:
+						questionSentence = assessment2s
+						correctAnswersVals = assessment2c;
+						correctAnswers = assessment2a;
+						break;
+					case 2:
+						questionSentence = assessment3s
+						correctAnswersVals = assessment3c;
+						correctAnswers = assessment3a;
+						break;
+				}
+
+		
+				for(var j = 0; j < wrongAnswers[i].length; j++) {
+					wrongAnswerAnalysis += index + ".) " +  questionSentence[wrongAnswers[i][j]] + "<br> &ensp; Your Answer: " + correctAnswers[wrongAnswers[i][j]][correctAnswersVals[j]] + "<br><br>";
+					index++;
+				}
+
+			}
+			alert(wrongAnswerAnalysis);
+			document.getElementById("Analysis1").innerHTML = wrongAnswerAnalysis;
+
 		}
 
 		function showComic() { 
 			document.getElementById("CONTAINER").innerHTML = document.getElementById("Show_Comic_Container").innerHTML;
 			updateComicImage();
-			seconds = 10;
+			seconds = 1;
 			timer = setInterval(function() { 
 				seconds--; 
 				document.getElementById("Show_Question_Timer").innerHTML = seconds;
@@ -462,7 +523,7 @@
 		</div>
 	</div>
 	<div id="Thank_You_Container" style="display:none">
-		<p class="centered"> 
+		<div class="thankYou"> 
 			<b> Thank you for your participation in this experiment and engagement with the Spanish language! </b> <br>
 			The information you have provided will be used to help discover the most effective method for teaching tenses in foreign language. We expect that by providing more scenes concerning time-transitions in the comic, learners will not only do better in choosing between the preterit and imperfect, but also better learn the distinctions between the preterit and imperfect over time. <br> <br>
 
@@ -474,16 +535,27 @@
 			<a href="https://conjuguemos.com/activities/spanish/verb/1"> Click here to practice conjugating various verbs.</a> <br> <br>
 
 			<a href="https://www.duolingo.com/"> Click here for a fun, free way to learn Spanish (or many other languages).</a> <br> <br>
+			
+			
+			<br>
+			<p id="correct_text" class="centered">
+				<H3> Analysis of your Answers </H3>
+				<p id="Analysis"> </p>
+
+				<p id="Analysis1"> </p>
+			</p> 
+			
 
 
-		</p>
+
+		</div>
 	</div>
 	<div id="Show_Comic_Container" style="display:none">
 		<div id="Show_Comic_1/2" class = "split2top" style="display:block">
 			<img src = "11.png" id = "comic2" class = "comicImage centered">
 		<div>
 		<div id="Show_Comic_2/2" class = "split2bottom" style="display:block">
-			<label id="Show_Question_Timer" class="centered"> 10 </label>
+			<label id="Show_Question_Timer" class="centered"> 5 </label>
 			<input type="button" id="Show_Question_Button" class="centered" value="Show Questions!" style="visibility:hidden" onclick="showQuestions()">
 		</div>
 	</div>
@@ -491,7 +563,7 @@
 	<div id="ExplanationContainer" style="display:none"> 
 		<div id="Explanation" class="centered" style="display: block">
 			<p> You are going to be shown a comic, please read it. 
-			After 15 seconds of reading, you may press a button that will show 5 sentences describing the comic. 
+			After 5 seconds of reading, you may press a button that will show 5 sentences describing the comic. 
 			The comic will be shown alongside the questions, you do <i> not </i> need to memorize the comic. 
 		 	For each sentence, please choose either the preterit or imperfect tense based on what is described in the comic. <br>
 		 	<center>
