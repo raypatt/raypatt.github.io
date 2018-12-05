@@ -1,0 +1,546 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<script>
+		var assessment = 1;
+		var level = 1;
+		var comicName = "";
+		var email = ""; 
+		var selfTaught = false;
+		var selfTaughtDescriptor = ""; 
+		var levels = [];
+		var assessment1s = ["Ayer (fui/iba) a visitar la antigua casa de mi abuelo.",
+			"la casa (estuvo/estaba) abandonada,",
+			"pero todavía (tuvo/tenía) muchos recuerdos de mi familia.",
+			"Al entrar (vi/veía) la mecedora",
+			"En ese momento (quise/quería) ver el resto de la casa.",
+			"El carrito al que (até/ataba) a mi abuelo."];
+		var assessment1t = ["FGP", "BGP", "BGP", "FGP", "FGN", "BGN"];
+		var assessment1c = ["0", "1", "1", "0", "0", "1"];
+		var assessment1a = [ 
+							["fui","iba"],
+							["estuvo","estaba"],
+							["tuvo","tenía"],
+							["vi","veía"],
+							["quise","quería"],
+							["até", "ataba"]
+						];
+		
+		var assessment2s = ["Después de ver la mecedora, de inmediato (me acordé/me acordaba) de las veces cuando…",
+			"Mi abuelo (me hamacó/me hamacaba) y…",
+			"mi mamá (tomó/tomaba) té.",
+			"Así es que (continué/continuaba) caminando por la casa.",
+			"(vi/veía) un carrito.",
+			"Él (hizo/hacía) el papel de caballo."];
+		var assessment2t = ["FGP", "BGP", "BGP", "FGN", "FGP", "BGN"];
+		var assessment2c = ["0", "1", "1", "0", "0", "1"];
+		var assessment2a = [ 
+							["me acordé","me acordaba"],
+							["me hamacó","me hamacaba"],
+							["tomó","tomaba"],
+							["continué","continuaba"],
+							["vi","veía"],
+							["hizo", "hacía"]
+						];
+
+		var assessment3s = ["Eso (fue/era) el carrito al que me sentaba.",
+			"Él me (llevó/llevaba) por la casa.",
+			"Entonces (quise/quería) explorar más de la casa.",
+			"(Fui/iba) al cuarto en el que mi abuelo guardaba la ropa de indio y un arco con flechas.",
+			"Vestido como indio, (jugué/jugaba) con mi abuelo.",
+			"En ese momento me (di cuenta/daba cuenta) de que eso fue la última vez con él."];
+		var assessment3t = ["BGP", "BGP", "FGN", "FGP", "BGN", "BGP"];
+		var assessment3c = ["1", "1", "0", "0", "1", "1"];
+		var assessment3a = [ 
+							["fue","era"],
+							["llevó","llevaba"],
+							["quise","quería"],
+							["fui","iba"],
+							["jugué","jugaba"],
+							["di cuenta", "daba cuenta"]
+						];
+
+		var level = 0;
+
+		var assessmentAnswers = [];
+
+		function answerStorage() { 
+			levels.push(level);
+			var answers = [];
+			answers.push(document.querySelector('input[name="Q1"]:checked').value);
+			answers.push(document.querySelector('input[name="Q2"]:checked').value);
+			answers.push(document.querySelector('input[name="Q3"]:checked').value);
+			answers.push(document.querySelector('input[name="Q4"]:checked').value);
+			answers.push(document.querySelector('input[name="Q5"]:checked').value);
+			answers.push(document.querySelector('input[name="Q6"]:checked').value);
+			assessmentAnswers.push(answers);
+			correct = 0;
+			switch(assessment) { 
+				case 1:
+					for(var i = 0; i < answers.length; i++) { 
+						if(answers[i] == assessment1c[i]) {
+							correct++;
+						}
+					}
+					break;
+				case 2: 
+					for(var i = 0; i < answers.length; i++) { 
+						if(answers[i] == assessment1c[i]) {
+							correct++;
+						}
+					}
+					break;
+				case 3:
+					for(var i = 0; i < answers.length; i++) { 
+						if(answers[i] == assessment1c[i]) {
+							correct++;
+						}
+					}
+					break; 
+			}
+
+			<!--level down because got 2/6--> 
+			if (correct/6 <= .34) { 
+				if(level > 1) { 
+					level--;
+				}
+			}
+			<!--level up because got 5/6-->
+			if (correct/6 >= .82) {
+				if(level <= 2) {
+					level++;
+				}
+			}
+
+			assessment++;
+			if(assessment <=3) { showComic(); }
+			else { thankYou(); }
+	
+		}
+
+		function updateComicImage() {
+			document.getElementById("comic1").src = assessment.toString() + level.toString() + ".png";
+			document.getElementById("comic2").src = assessment.toString() + level.toString() + ".png";
+		}
+		function showExplanation() {
+			if(selfTaught) { 
+				selfTaughtDescriptor = document.getElementById("descriptor").value; 
+			}
+			email = document.getElementById("email").value;
+			level = document.querySelector('input[name="experience"]:checked').value;
+			document.getElementById("CONTAINER").innerHTML = document.getElementById("ExplanationContainer").innerHTML;
+		}
+
+		function updateSentences() { 
+			switch(assessment) {
+				case 1: 
+					document.getElementById("Q1").innerHTML = assessment1s[0]; 
+					document.getElementById("Q2").innerHTML = assessment1s[1]; 
+					document.getElementById("Q3").innerHTML = assessment1s[2]; 
+					document.getElementById("Q4").innerHTML = assessment1s[3]; 
+					document.getElementById("Q5").innerHTML = assessment1s[4]; 
+					document.getElementById("Q6").innerHTML = assessment1s[5];
+
+					document.getElementById("Q1P").innerHTML = "<input type=\"radio\" name = \"Q1\" value = \"0\">" + 
+																assessment1a[0][0] + "</input>"; 
+					document.getElementById("Q1I").innerHTML = "<input type=\"radio\" name = \"Q1\" value = \"1\">" + 
+																assessment1a[0][1] + "</input>"; 
+
+					document.getElementById("Q2P").innerHTML = "<input type=\"radio\" name = \"Q2\" value = \"0\">" + 
+																assessment1a[1][0] + "</input>"; 
+					document.getElementById("Q2I").innerHTML = "<input type=\"radio\" name = \"Q2\" value = \"1\">" + 
+																assessment1a[1][1] + "</input>"; 
+
+					document.getElementById("Q3P").innerHTML = "<input type=\"radio\" name = \"Q3\" value = \"0\">" + 
+																assessment1a[2][0] + "</input>"; 
+					document.getElementById("Q3I").innerHTML = "<input type=\"radio\" name = \"Q3\" value = \"1\">" + 
+																assessment1a[2][1] + "</input>"; 
+
+					document.getElementById("Q4P").innerHTML = "<input type=\"radio\" name = \"Q4\" value = \"0\">" + 
+																assessment1a[3][0] + "</input>"; 
+					document.getElementById("Q4I").innerHTML = "<input type=\"radio\" name = \"Q4\" value = \"1\">" + 
+																assessment1a[3][1] + "</input>"; 
+
+					document.getElementById("Q5P").innerHTML = "<input type=\"radio\" name = \"Q5\" value = \"0\">" + 
+																assessment1a[4][0] + "</input>"; 
+					document.getElementById("Q5I").innerHTML = "<input type=\"radio\" name = \"Q5\" value = \"1\">" + 
+																assessment1a[4][1] + "</input>"; 
+
+					document.getElementById("Q6P").innerHTML = "<input type=\"radio\" name = \"Q6\" value = \"0\">" + 
+																assessment1a[5][0] + "</input>"; 
+					document.getElementById("Q6I").innerHTML = "<input type=\"radio\" name = \"Q6\" value = \"1\">" + 
+																assessment1a[5][1] + "</input>"; 
+ 
+					
+					break;
+				case 2: 
+					document.getElementById("Q1").innerHTML = assessment2s[0]; 
+					document.getElementById("Q2").innerHTML = assessment2s[1]; 
+					document.getElementById("Q3").innerHTML = assessment2s[2]; 
+					document.getElementById("Q4").innerHTML = assessment2s[3]; 
+					document.getElementById("Q5").innerHTML = assessment2s[4]; 
+					document.getElementById("Q6").innerHTML = assessment2s[5];
+
+					document.getElementById("Q1P").innerHTML = "<input type=\"radio\" name = \"Q1\" value = \"0\">" + 
+																assessment2a[0][0] + "</input>"; 
+					document.getElementById("Q1I").innerHTML = "<input type=\"radio\" name = \"Q1\" value = \"1\">" + 
+																assessment2a[0][1] + "</input>"; 
+
+					document.getElementById("Q2P").innerHTML = "<input type=\"radio\" name = \"Q2\" value = \"0\">" + 
+																assessment2a[1][0] + "</input>"; 
+					document.getElementById("Q2I").innerHTML = "<input type=\"radio\" name = \"Q2\" value = \"1\">" + 
+																assessment2a[1][1] + "</input>"; 
+
+					document.getElementById("Q3P").innerHTML = "<input type=\"radio\" name = \"Q3\" value = \"0\">" + 
+																assessment2a[2][0] + "</input>"; 
+					document.getElementById("Q3I").innerHTML = "<input type=\"radio\" name = \"Q3\" value = \"1\">" + 
+																assessment2a[2][1] + "</input>"; 
+
+					document.getElementById("Q4P").innerHTML = "<input type=\"radio\" name = \"Q4\" value = \"0\">" + 
+																assessment2a[3][0] + "</input>"; 
+					document.getElementById("Q4I").innerHTML = "<input type=\"radio\" name = \"Q4\" value = \"1\">" + 
+																assessment2a[3][1] + "</input>"; 
+
+					document.getElementById("Q5P").innerHTML = "<input type=\"radio\" name = \"Q5\" value = \"0\">" + 
+																assessment2a[4][0] + "</input>"; 
+					document.getElementById("Q5I").innerHTML = "<input type=\"radio\" name = \"Q5\" value = \"1\">" + 
+																assessment2a[4][1] + "</input>"; 
+
+					document.getElementById("Q6P").innerHTML = "<input type=\"radio\" name = \"Q6\" value = \"0\">" + 
+																assessment2a[5][0] + "</input>"; 
+					document.getElementById("Q6I").innerHTML = "<input type=\"radio\" name = \"Q6\" value = \"1\">" + 
+																assessment2a[5][1] + "</input>"; 
+					break;
+				case 3: 
+					document.getElementById("Q1").innerHTML = assessment3s[0]; 
+					document.getElementById("Q2").innerHTML = assessment3s[1]; 
+					document.getElementById("Q3").innerHTML = assessment3s[2]; 
+					document.getElementById("Q4").innerHTML = assessment3s[3]; 
+					document.getElementById("Q5").innerHTML = assessment3s[4]; 
+					document.getElementById("Q6").innerHTML = assessment3s[5];
+
+					document.getElementById("Q1P").innerHTML = "<input type=\"radio\" name = \"Q1\" value = \"0\">" + 
+																assessment3a[0][0] + "</input>"; 
+					document.getElementById("Q1I").innerHTML = "<input type=\"radio\" name = \"Q1\" value = \"1\">" + 
+																assessment3a[0][1] + "</input>"; 
+
+					document.getElementById("Q2P").innerHTML = "<input type=\"radio\" name = \"Q2\" value = \"0\">" + 
+																assessment3a[1][0] + "</input>"; 
+					document.getElementById("Q2I").innerHTML = "<input type=\"radio\" name = \"Q2\" value = \"1\">" + 
+																assessment3a[1][1] + "</input>"; 
+
+					document.getElementById("Q3P").innerHTML = "<input type=\"radio\" name = \"Q3\" value = \"0\">" + 
+																assessment3a[2][0] + "</input>"; 
+					document.getElementById("Q3I").innerHTML = "<input type=\"radio\" name = \"Q3\" value = \"1\">" + 
+																assessment3a[2][1] + "</input>"; 
+
+					document.getElementById("Q4P").innerHTML = "<input type=\"radio\" name = \"Q4\" value = \"0\">" + 
+																assessment3a[3][0] + "</input>"; 
+					document.getElementById("Q4I").innerHTML = "<input type=\"radio\" name = \"Q4\" value = \"1\">" + 
+																assessment3a[3][1] + "</input>"; 
+
+					document.getElementById("Q5P").innerHTML = "<input type=\"radio\" name = \"Q5\" value = \"0\">" + 
+																assessment3a[4][0] + "</input>"; 
+					document.getElementById("Q5I").innerHTML = "<input type=\"radio\" name = \"Q5\" value = \"1\">" + 
+																assessment3a[4][1] + "</input>"; 
+
+					document.getElementById("Q6P").innerHTML = "<input type=\"radio\" name = \"Q6\" value = \"0\">" + 
+																assessment3a[5][0] + "</input>"; 
+					document.getElementById("Q6I").innerHTML = "<input type=\"radio\" name = \"Q6\" value = \"1\">" + 
+																assessment3a[5][1] + "</input>"; 
+
+					break;	
+			}
+			 
+		}
+
+		function showDescriptor() { 
+			selfTaught = true;
+			document.getElementById("Descriptor_Container").style.display= "block";
+		}
+
+		function hideDescriptor() { 
+			selfTaught = false; 
+			document.getElementById("Descriptor_Container").style.display= "none";
+		}
+
+		function thankYou() {
+
+ 			<!-- Put assessment one answers into google form -->
+			document.getElementById("entry.1144379352").value = email; 
+
+			document.getElementById("entry.13633647").value =levels[0] + " | " + selfTaughtDescriptor;
+			document.getElementById("entry.55240984").value = levels[1];
+			document.getElementById("entry.494268795").value = levels[2];
+
+
+			document.getElementById("entry.459431296").value = assessmentAnswers[0][0];
+			document.getElementById("entry.1751600015").value = assessmentAnswers[0][1];
+			document.getElementById("entry.1014379869").value = assessmentAnswers[0][2];
+			document.getElementById("entry.1492906340").value = assessmentAnswers[0][3];
+			document.getElementById("entry.1766293698").value = assessmentAnswers[0][4];
+			document.getElementById("entry.1482551063").value = assessmentAnswers[0][5];
+
+ 			<!-- Put assessment two answers into google form -->
+			document.getElementById("entry.766708849").value = assessmentAnswers[1][0];
+			document.getElementById("entry.1870798942").value = assessmentAnswers[1][1];
+			document.getElementById("entry.652501812").value = assessmentAnswers[1][2];
+			document.getElementById("entry.1961263950").value = assessmentAnswers[1][3];
+			document.getElementById("entry.2127367559").value = assessmentAnswers[1][4];
+			document.getElementById("entry.280746817").value = assessmentAnswers[1][5];
+
+ 			<!-- Put assessment three answers into google form -->
+			document.getElementById("entry.886199065").value = assessmentAnswers[2][0];
+			document.getElementById("entry.400512352").value = assessmentAnswers[2][1];
+			document.getElementById("entry.1048132917").value = assessmentAnswers[2][2];
+			document.getElementById("entry.1291301446").value = assessmentAnswers[2][3];
+			document.getElementById("entry.912105705").value = assessmentAnswers[2][4];
+			document.getElementById("entry.1735483707").value = assessmentAnswers[2][5];
+
+			document.getElementById("gform").submit();
+
+			document.getElementById("CONTAINER").innerHTML = document.getElementById("Thank_You_Container").innerHTML;
+		}
+
+		function showComic() { 
+			document.getElementById("CONTAINER").innerHTML = document.getElementById("Show_Comic_Container").innerHTML;
+			updateComicImage();
+			seconds = 1;
+			timer = setInterval(function() { 
+				seconds--; 
+				document.getElementById("Show_Question_Timer").innerHTML = seconds;
+				if (seconds == 0) { 
+					changeButton();
+					clearInterval(timer);
+				} 
+			}, 1000);
+
+			function changeButton() {
+				document.getElementById("Show_Question_Timer").style.visibility = "hidden";
+   				document.getElementById("Show_Question_Button").style.visibility = "visible";
+			}
+			
+		}
+		function showBegin() {
+			document.getElementById("Test_Phase_1/2").style.display = "none";
+			document.getElementById("Test_Phase_2/2").style.display = "none";
+
+			document.getElementById("Intro_Questions").style.display = "block";
+
+		}
+
+		function sendAnswers() {
+			document.getElementById().value('652027595_TMP1') = document.getElementById(r1).value
+		}
+
+		function showQuestions() {
+			document.getElementById("CONTAINER").innerHTML = document.getElementById("Test_Container").innerHTML;
+			updateComicImage();
+			updateSentences();
+		}
+
+		
+	</script>
+	<link rel="stylesheet" type="text/css" href="experiment_styles.css">
+	<title>
+		Preterite/Imperfect Drill
+	</title>
+</head>
+<body>
+	<div id="CONTAINER" style="display:block">
+		<div id="Intro_Questions" class="centered" style="display: block">
+			<center>
+			E-mail address: <input type="text" id="email"> </input> 
+			<br> <br>
+			Years of Spanish taken: <br>
+			<table>
+				<tr>
+					<th> Highschool </th>
+					<th> Undergraduate </th>
+				</tr>
+				<tr>
+					<td>
+						<label> <input type="radio" name="experience" id="experience1" value="1" onclick="hideDescriptor()"> </input> One year </label> <br>
+						<label> <input type="radio" name="experience" id="experience2" value="1" onclick="hideDescriptor()"> </input> Two Years </label> <br>
+						<label> <input type="radio" name="experience" id="experience3" value="2" onclick="hideDescriptor()"> </input> Three Years </label> <br>
+						<label> <input type="radio" name="experience" id="experience4" value="2" onclick="hideDescriptor()"> </input> Four Years </label> <br>
+					</td>
+					<td>
+						<label> <input type="radio" name="experience" id="experience5" value="1" onclick="hideDescriptor()"> </input> One Semester </label> <br>
+						<label> <input type="radio" name="experience" id="experience6" value="1" onclick="hideDescriptor()"> </input> Two Semesters </label> <br>
+						<label> <input type="radio" name="experience" id="experience7" value="2" onclick="hideDescriptor()"> </input> Three Semesters </label> <br>
+						<label> <input type="radio" name="experience" id="experience8" value="2" onclick="hideDescriptor()"> </input> Four Semesters </label> <br>
+					</td>
+				</tr>
+						
+				<br>
+			</table>
+			<center>
+				<label> <input type="radio" name="experience" id="experience9" value="3" onclick="hideDescriptor()"> </input> More than listed </label> <br>
+				<label> <input type="radio" name="experience" id="experience10" value="2" onclick="showDescriptor()"> Self-taught
+					<div id="Descriptor_Container" style="display:none">
+						<label> Describe your experience: 
+						<input type="text" name="descriptor" id="descriptor"> </input>
+						</label>
+					</div>
+				</input> </label>
+				<br>
+				<br>
+				<input type="button" name="next" value="Next!" onclick="showExplanation()"> </input> 
+			</center>
+		</div>
+	</div>
+
+	<div id="Test_Container" style="display:none"> 
+		<div id="Test_Phase_1/2" class="split comic" style="display:block">
+			<img src = "11.png" id = "comic1" class="comicSplitImage centered">
+		</div>
+		<div id="Test_Phase_2/2" class="split questions"style="display:bock">
+			<div class = "centered">
+
+					<p id="Q1"> </p>
+ 				 	<label id = "Q1P"> 
+ 				 		<input type="radio" name = "Q1" value = "0"> 
+ 				 	</label> <br>
+
+ 				 	<label id ="Q1I">
+ 				 		<input type="radio" name = "Q1" value = "1">  
+ 				 	</label>
+
+ 				 	
+					<p id="Q2"> </p>
+ 				 	<label id = "Q2P"> 
+ 				 		<input type="radio" name = "Q2" value = "0"> 
+ 				 	</label> <br>
+
+ 				 	<label id ="Q2I">
+ 				 		<input type="radio" name = "Q2" value = "1">  
+ 				 	</label>
+
+					<p id="Q3"> </p>
+ 				 	<label id = "Q3P"> 
+ 				 		<input type="radio" name = "Q3" value = "0"> 
+ 				 	</label> <br>
+
+ 				 	<label id ="Q3I">
+ 				 		<input type="radio" name = "Q3" value = "1">  
+ 				 	</label>
+
+					<p id="Q4"> </p>
+ 				 	<label id = "Q4P"> 
+ 				 		<input type="radio" name = "Q4" value = "0"> 
+ 				 	</label> <br>
+
+ 				 	<label id ="Q4I">
+ 				 		<input type="radio" name = "Q4" value = "1">  
+ 				 	</label>
+
+					<p id="Q5"> </p>
+ 				 	<label id = "Q5P"> 
+ 				 		<input type="radio" name = "Q5" value = "0"> 
+ 				 	</label> <br>
+
+ 				 	<label id ="Q5I">
+ 				 		<input type="radio" name = "Q5" value = "1">  
+ 				 	</label>
+
+
+					<p id="Q6"> </p>
+ 				 	<label id = "Q6P"> 
+ 				 		<input type="radio" name = "Q6" value = "0"> 
+ 				 	</label> <br>
+
+ 				 	<label id ="Q6I">
+ 				 		<input type="radio" name = "Q6" value = "1">  
+ 				 	</label>
+ 				 	<br> 
+ 				 	<br>
+ 				 	<center>
+ 				 		<input type="button" id="sendToAnswerStorage" onclick="answerStorage()" value="Next!">
+					</center>
+			</div>
+		</div>
+	</div>
+	<div id="Thank_You_Container" style="display:none">
+		<p class="centered"> 
+			<b> Thank you for your participation in this experiment and engagement with the Spanish language! </b> <br>
+			The information you have provided will be used to help discover the most effective method for teaching tenses in foreign language. We expect that by providing more scenes concerning time-transitions in the comic, learners will not only do better in choosing between the preterit and imperfect, but also better learn the distinctions between the preterit and imperfect over time. <br> <br>
+
+
+			<a href="https://drive.google.com/open?id=1AvtyNbo5fFx6IWKHiLx3Tha5UBcRG3YA"> Click here to learn more about the method we used.</a> <br> <br>
+
+			<a href="https://studyspanish.com/grammar/lessons/pretimp1"> Click here to learn more about the past tense in Spanish.</a> <br> <br>
+
+			<a href="https://conjuguemos.com/activities/spanish/verb/1"> Click here to practice conjugating various verbs.</a> <br> <br>
+
+			<a href="https://www.duolingo.com/"> Click here for a fun, free way to learn Spanish (or many other languages).</a> <br> <br>
+
+
+		</p>
+	</div>
+	<div id="Show_Comic_Container" style="display:none">
+		<div id="Show_Comic_1/2" class = "split2top" style="display:block">
+			<img src = "11.png" id = "comic2" class = "comicImage centered">
+		<div>
+		<div id="Show_Comic_2/2" class = "split2bottom" style="display:block">
+			<label id="Show_Question_Timer" class="centered"> 10 </label>
+			<input type="button" id="Show_Question_Button" class="centered" value="Show Questions!" style="visibility:hidden" onclick="showQuestions()">
+		</div>
+	</div>
+	
+	<div id="ExplanationContainer" style="display:none"> 
+		<div id="Explanation" class="centered" style="display: block">
+			<p> You are going to be shown a comic, please read it. 
+			After 15 seconds of reading, you may press a button that will show 5 sentences describing the comic. 
+			The comic will be shown alongside the questions, you do <i> not </i> need to memorize the comic. 
+		 	For each sentence, please choose either the preterit or imperfect tense based on what is described in the comic. <br>
+		 	<center>
+		 		<b> You must make a selection for each sentence. </b> <br>
+		 		<i> You may find it helpful to zoom in on the comic. </i> <br>
+			</center>
+			<br>
+			<center> <input type="button" name="next" value="Start!" onclick="showComic()"> </input> </center>
+		</div>
+	</div>
+	<div style="display:none">
+ 		<form name="gform" id="gform" enctype="text/plain" action="https://docs.google.com/forms/d/e/1FAIpQLSep0FOLsWPGkr-HHkOcEM4MQbpuMe4rLtrJ68iEz-Oc9slyHw/formResponse?usp=pp_url" target="hidden_iframe" onsubmit="submitted=true;">
+
+ 			<!--Intro Questions -->
+ 			<input type="text" id="entry.1144379352" name="entry.1144379352"> </input>
+ 			<input type="text" id="entry.13633647" name="entry.13633647"> </input>
+ 			<input type="text" id="entry.55240984" name="entry.55240984"> </input>
+ 			<input type="text" id="entry.494268795" name="entry.494268795"> </input> 			
+
+ 			<!-- ASSESSMENT ONE ANSWERS -->
+ 			<input type="text" id="entry.459431296" name="entry.459431296"> </input>
+ 			<input type="text" id="entry.1751600015" name="entry.1751600015"> </input>
+ 			<input type="text" id="entry.1014379869" name="entry.1014379869"> </input>
+ 			<input type="text" id="entry.1492906340" name="entry.1492906340"> </input>
+ 			<input type="text" id="entry.1766293698" name="entry.1766293698"> </input>
+ 			<input type="text" id="entry.1482551063" name="entry.1482551063"> </input>
+
+
+ 			<!-- ASSESSMENT TWO ANSWERS -->
+ 			<input type="text" id="entry.766708849" name="entry.766708849"> </input>
+ 			<input type="text" id="entry.1870798942" name="entry.1870798942"> </input>
+ 			<input type="text" id="entry.652501812" name="entry.652501812"> </input>
+ 			<input type="text" id="entry.1961263950" name="entry.1961263950"> </input>
+ 			<input type="text" id="entry.2127367559" name="entry.2127367559"> </input>
+ 			<input type="text" id="entry.280746817" name="entry.280746817"> </input>
+
+
+ 			<!-- ASSESSMENT THREE ANSWERS -->
+ 			<input type="text" id="entry.886199065" name="entry.886199065"> </input>
+ 			<input type="text" id="entry.400512352" name="entry.400512352"> </input>
+ 			<input type="text" id="entry.1048132917" name="entry.1048132917"> </input>
+ 			<input type="text" id="entry.1291301446" name="entry.1291301446"> </input>
+ 			<input type="text" id="entry.912105705" name="entry.912105705"> </input>
+ 			<input type="text" id="entry.1735483707" name="entry.1735483707"> </input>
+
+
+			<input type="submit" value="Submit"> </input>
+		</form>
+		<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {}"></iframe>	
+	</div>
+</body>
+</html>
