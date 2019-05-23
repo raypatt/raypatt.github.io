@@ -285,7 +285,7 @@
 			var dy = activeItem.getBoundingClientRect().top - (.9*window.outerHeight) * (parseFloat(hole.style.top)/100.0);
 
 			var distance = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2));
-
+      document.getElementById("DICK").innerHTML = distance;
 			if (distance < 20) { 
         correctSound.play();
         const myRand = () => {
