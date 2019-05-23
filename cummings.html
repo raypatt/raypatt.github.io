@@ -279,11 +279,13 @@
 
         if(activeItem.id.includes("obj")) { 
         	var hole = document.getElementById(activeItem.className.substring(0,activeItem.className.length-4).concat("_hole"));
-          document.getElementById("DICK").innerHTML = window.innerWidth;
+          
         	var dx = activeItem.getBoundingClientRect().left  - window.innerWidth* (parseFloat(hole.style.left)/100.0);
 			var dy = activeItem.getBoundingClientRect().top - (.9*window.innerHeight) * (parseFloat(hole.style.top)/100.0);
 
+
 			var distance = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2));
+      document.getElementById("DICK").innerHTML = distance;
 			if (distance < 20) { 
         correctSound.play();
         const myRand = () => {
