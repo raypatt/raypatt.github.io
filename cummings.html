@@ -279,7 +279,7 @@
 
         if(activeItem.id.includes("obj")) { 
         	var hole = document.getElementById(activeItem.className.substring(0,activeItem.className.length-4).concat("_hole"));
-        	document.getElementById("DICK") = window.outerWidth;
+        	document.getElementById("DICK") = "DICK";
         	var dx = activeItem.getBoundingClientRect().left  - window.outerWidth* (parseFloat(hole.style.left)/100.0);
 			var dy = activeItem.getBoundingClientRect().top - (.9*window.outerHeight) * (parseFloat(hole.style.top)/100.0);
 
