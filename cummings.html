@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<html>
+<head>  
+	<meta name="viewport" 
+        content="width=device-width, 
+        initial-scale=1.0, 
+        user-scalable=no" />
+  <title>Game</title>
+ 
+
+  <style>
+  	  html, body {margin: 0; height: 100%; overflow: hidden}
+      #container {
+  	  height: 100%;
+  	  width: 100%;
+  	  top: 0px;
+  	  left: 0px;
+  	  position: fixed;
+  	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/background.png?raw=true");
+  	  background-repeat: no-repeat;
+  	  background-position: top left;
+  	  background-size: 100% 90%;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      display:flex;
+  	  touch-action: none;
+  	}
+
+  	.square {
+  	  position: fixed;
+  	  width: 100px;
+  	  height: 100px;
+  	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/square_hole.png?raw=true");
+  	  background-repeat: no-repeat;
+  	  background-position: top left;
+  	  background-size: 100% 100%;
+  	  touch-action: none;
+  	  user-select: none;
+  	}
+
+  	.triangle {
+  	  position: fixed;
+  	  width: 100px;
+  	  height: 100px;
+  	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/triangle_hole.png?raw=true");
+  	  background-repeat: no-repeat;
+  	  background-position: top left;
+  	  background-size: 100% 100%;
+  	  touch-action: none;
+  	  user-select: none;
+  	}
+
+  	.circle {
+  	  position: fixed;
+  	  width: 100px;
+  	  height: 100px;
+  	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/Circle_hole.png?raw=true");
+  	  background-repeat: no-repeat;
+  	  background-position: top left;
+  	  background-size: 100% 100%;
+  	  touch-action: none;
+  	  user-select: none;
+  	}
+
+  	.square_obj {
+  	  position: fixed;
+  	  width: 100px;
+  	  height: 100px;
+  	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/square.png?raw=true");
+  	  background-repeat: no-repeat;
+  	  background-position: top left;
+  	  background-size: 100% 100%;
+  	  touch-action: none;
+  	  user-select: none;
+  	}
+
+  	.triangle_obj {
+  	  position: fixed;
+  	  width: 100px;
+  	  height: 100px;
+  	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/triangle.png?raw=true");
+  	  background-repeat: no-repeat;
+  	  background-position: top left;
+  	  background-size: 100% 100%;
+  	  touch-action: none;
+  	  user-select: none;
+  	}
+
+  	   
+  	.circle_obj {
+  	  position: fixed;
+  	  width: 100px;
+  	  height: 100px;
+  	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/circle.png?raw=true");
+  	  background-repeat: no-repeat;
+  	  background-position: top left;
+  	  background-size: 100% 100%;
+  	  touch-action: none;
+  	  user-select: none;
+  	}
+
+  	.menu {
+  	  position: absolute;
+  	  height: 30%;
+  	  width: 100%;
+  	  top: 90%;
+  	  left: 0%;
+  	  background-color: #888;
+  	  display: flex;
+  	  overflow: hidden;
+  	  touch-action: none;
+  	}
+
+  	.glitter-star {
+  position: absolute;
+  background-color: gold;
+  height: 5px;
+  width: 5px;
+
+  animation: glitter 2s linear 0s infinite normal;
+  -webkit-animation: glitter 2s linear 0s infinite normal;
+  -moz-animation: glitter 2s linear 0s infinite normal;
+  -ms-animation: glitter 2s linear 0s infinite normal;
+  -o-animation: glitter 2s linear 0s infinite normal;
+}
+
+@keyframes glitter {
+  0% {
+    -webkit-transform: scale(1.0);
+    opacity: 1;
+  }
+  25% {
+    -webkit-transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.0);
+    opacity: 1;
+  }
+  75% {
+    -webkit-transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 1;
+  }
+}
+
+  </style>
+
+
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div id="container">
+      	<div id="item">
+      	</div>
+      </div>
+
+      <div id="Menu" class="menu">
+        <table style="width:100%;text-align:center;">
+          <tr>
+            <td> <button id="test" onclick="generateShapes(0)"> Shapes (Basic) </button> </td>
+            <td id="DICK"> Shapes (Advanced) </td>
+            <td> Shapes and Colors! </td>
+            <td> Shapes and Sizes! </td>
+            <td> Shapes, Sizes, and Colors! </td>
+          </tr>
+        </table>
+      </div>
+
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+  <script>
+  	var generated = new Set(); 
+	//var triangleSound = new Sound("triangle.mp3");
+	var squareSound = new Audio("Square.mp3"); 
+	var circleSound = new Audio("Circle.mp3");
+	var triangleSound = new Audio("Triangle.mp3");
+
+	var correctSound = new Audio("Correct.mp3"); 
+	var incorrectSound = new Audio("Incorrect.mp3");
+
+	var notSquareSound = new Audio("notSquare.mp3"); 
+	var notCircleSound = new Audio("notCircle.mp3");
+	var notTriangleSound = new Audio("notTriangle.mp3");
+	//var circleSound = new Sound("circle.mp3");
+	var xpoints = [];
+
+ 	var container = document.querySelector("#container");
+    var activeItem = null;
+
+    var active = false;
+
+    container.addEventListener("touchstart", dragStart, false);
+    container.addEventListener("touchend", dragEnd, false);
+    container.addEventListener("touchmove", drag, false);
+
+    container.addEventListener("mousedown", dragStart, false);
+    container.addEventListener("mouseup", dragEnd, false);
+    container.addEventListener("mousemove", drag, false);
+
+    function dragStart(e) {
+      if (e.target !== e.currentTarget) {
+        active = true;
+
+        // this is the item we are interacting with
+        activeItem = e.target;
+        if ((activeItem !== null) && (activeItem.id.includes("obj"))) {
+
+    	  squareSound.play();
+          if (!activeItem.xOffset) {
+            activeItem.xOffset = 0;
+          }
+
+          if (!activeItem.yOffset) {
+            activeItem.yOffset = 0;
+          }
+
+          if (e.type === "touchstart") {
+            activeItem.initialX = e.touches[0].clientX - activeItem.xOffset;
+            activeItem.initialY = e.touches[0].clientY - activeItem.yOffset;
+          } else {
+            activeItem.initialX = e.clientX - activeItem.xOffset;
+            activeItem.initialY = e.clientY - activeItem.yOffset;
+          }
+        }
+	     
+      }
+    }
+
+    function dragEnd(e) {
+
+      if (activeItem !== null) {
+        activeItem.initialX = activeItem.currentX;
+        activeItem.initialY = activeItem.currentY;
+
+        if(activeItem.id.includes("obj")) { 
+        	var hole = document.getElementById(activeItem.className.substring(0,activeItem.className.length-4).concat("_hole"));
+        	
+        	var dx = activeItem.getBoundingClientRect().left  - window.outerWidth* (parseFloat(hole.style.left)/100.0);
+			var dy = activeItem.getBoundingClientRect().top - (.9*window.outerHeight) * (parseFloat(hole.style.top)/100.0);
+
+			var distance = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2));
+
+			if (distance < 20) { 
+				const myRand = () => {
+					let r = 50;
+					while (40 < r && r < 60) {
+						r = Math.random() * 100;
+					}
+					return r;
+				}
+
+				for (let i = 0; i < 50; i++) {
+				  const delay = Math.random() + 's';
+				  const el = document.createElement('div');
+				  el.className      = 'glitter-star';
+				  el.style.top      = myRand() + '%';
+				  el.style.left     = myRand() + '%';
+				  el.style.animationDelay       = delay;
+				  el.style.msAnimationDelay     = delay;
+				  el.style.webkitAnimationDelay = delay;
+				  el.style.monAnimationDelay    = delay;
+				  hole.appendChild(el);
+				}
+				container.removeChild(activeItem.id);
+			}
+
+        }
+        else {
+        	test();
+        	//document.getElementById("DICK").innerHTML = activeItem.className.substring(0,activeItem.className.length);
+        }
+      }
+
+      active = false;
+      activeItem = null;
+    }
+
+    function drag(e) {
+      if (active) {
+        if (e.type === "touchmove") {
+          e.preventDefault();
+
+          activeItem.currentX = e.touches[0].clientX - activeItem.initialX;
+          activeItem.currentY = e.touches[0].clientY - activeItem.initialY;
+        } else {
+          activeItem.currentX = e.clientX - activeItem.initialX;
+          activeItem.currentY = e.clientY - activeItem.initialY;
+        }
+
+        activeItem.xOffset = activeItem.currentX;
+        activeItem.yOffset = activeItem.currentY;
+
+        setTranslate(activeItem.currentX, activeItem.currentY, activeItem);
+      }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
+
+var level = 0;
+
+function generateShapes(inputLevel) {
+  var allShapes = [
+  ["square", "circle", "triangle"],
+  ["rectangle", "oval"]
+  ];
+   generated = new Set();
+  var shapes = [];
+  var numGenerated = 0;
+  var objNum = 3;
+  var xpoint = 0;
+  var step = 100.00 / objNum;
+  xpoints = [];
+
+  if (0 == parseInt(inputLevel, 10)) {
+    var possibleShapes = allShapes[parseInt(inputLevel, 10)];  
+    while (numGenerated < objNum) {
+
+
+      var item = possibleShapes[Math.floor(Math.random() * possibleShapes.length)];
+
+
+      if (!generated.has(item)) {
+        if (numGenerated == 0) {
+          xpoint = step / 2;
+        } else {
+          xpoint = xpoint + step;
+        }
+
+
+
+        generated.add(item);
+        numGenerated = numGenerated + 1;
+
+        var div = document.createElement('div');
+        div.id = item + "_hole";
+
+        div.className = item;
+        div.style.left = xpoint + "%";
+        div.style.top = "70%"; 
+        xpoints.push([xpoint, div.className])
+        document.querySelector("#container").appendChild(div);
+
+        shapes.push(div);
+
+
+      }
+
+    }
+
+    shuffle(xpoints);
+    var i = 0;
+    shapes.forEach(function(element) {
+      var div = document.createElement('div');
+      document.querySelector("#container").appendChild(div);
+      div.id = "obj_" + element.id;
+      div.className = element.className + "_obj";
+      div.style.top = "50%";
+      div.style.left = xpoints[i][0] + "%";
+      i = i + 1;
+    });
+
+
+
+  }
+}
+    function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+    function test() { 
+    	document.getElementById("DICK").innerHTML = "DICK";
+    }
+</script>
+
+  
+</html>
