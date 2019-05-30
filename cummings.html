@@ -18,6 +18,7 @@
   	  left: 0px;
   	  position: fixed;
   	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/background.png?raw=true");
+      background-image: url("background.png");
   	  background-repeat: no-repeat;
   	  background-position: top left;
   	  background-size: 100% 90%;
@@ -30,9 +31,10 @@
 
   	.square {
   	  position: fixed;
-  	  width: 100px;
-  	  height: 100px;
+  	  width: 8vw ;
+  	  height: 8vw;
   	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/square_hole.png?raw=true");
+      background-image: url("square_hole.png");
   	  background-repeat: no-repeat;
   	  background-position: top left;
   	  background-size: 100% 100%;
@@ -42,9 +44,10 @@
 
   	.triangle {
   	  position: fixed;
-  	  width: 100px;
-  	  height: 100px;
+      width: 8vw ;
+      height: 8vw;
   	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/triangle_hole.png?raw=true");
+      background-image: url("triangle_hole.png");
   	  background-repeat: no-repeat;
   	  background-position: top left;
   	  background-size: 100% 100%;
@@ -54,9 +57,10 @@
 
   	.circle {
   	  position: fixed;
-  	  width: 100px;
-  	  height: 100px;
+      width: 8vw ;
+      height: 8vw;
   	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/Circle_hole.png?raw=true");
+      background-image: url("circle_hole.png");
   	  background-repeat: no-repeat;
   	  background-position: top left;
   	  background-size: 100% 100%;
@@ -66,9 +70,10 @@
 
   	.square_obj {
   	  position: fixed;
-  	  width: 100px;
-  	  height: 100px;
+      width: 8vw ;
+      height: 8vw;
   	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/square.png?raw=true");
+      background-image: url("square.png");
   	  background-repeat: no-repeat;
   	  background-position: top left;
   	  background-size: 100% 100%;
@@ -78,9 +83,10 @@
 
   	.triangle_obj {
   	  position: fixed;
-  	  width: 100px;
-  	  height: 100px;
+      width: 8vw ;
+      height: 8vw;
   	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/triangle.png?raw=true");
+      background-image: url("triangle.png");
   	  background-repeat: no-repeat;
   	  background-position: top left;
   	  background-size: 100% 100%;
@@ -91,9 +97,10 @@
   	   
   	.circle_obj {
   	  position: fixed;
-  	  width: 100px;
-  	  height: 100px;
+      width: 8vw ;
+      height: 8vw;
   	  background-image: url("https://github.com/raypatt/raypatt.github.io/blob/master/Shapes_experiment/circle.png?raw=true");
+      background-image: url("circle.png");
   	  background-repeat: no-repeat;
   	  background-position: top left;
   	  background-size: 100% 100%;
@@ -214,6 +221,11 @@
 
 
   <script>
+
+  alert("Hello! Welcome to the Shape-Learning Game!")
+  alert("In order to play, select the level you want to play at the bottom of the screen. Your options will be basic, advanced, shapes and colors, shapes and sizes, or shapes, sizes, and colors!")
+  alert("The goal of the game is to move the shapes from the water back to land! Move all the shapes to their spot to win!")
+
   	var generated = new Set(); 
 	//var triangleSound = new Sound("triangle.mp3");
 	var squareSound = new Audio("Square.mp3"); 
@@ -250,7 +262,17 @@
         activeItem = e.target;
         if ((activeItem !== null) && (activeItem.id.includes("obj"))) {
 
-    	  squareSound.play();
+    	   if (activeItem.id.includes("square")) { 
+          squareSound.play();
+         }
+         if (activeItem.id.includes("circle")) { 
+          circleSound.play(); 
+         }
+         if (activeItem.id.includes("triangle")) { 
+          triangleSound.play(); 
+         }
+
+
           if (!activeItem.xOffset) {
             activeItem.xOffset = 0;
           }
@@ -281,12 +303,12 @@
         	var hole = document.getElementById(activeItem.className.substring(0,activeItem.className.length-4).concat("_hole"));
           
         	var dx = activeItem.getBoundingClientRect().left  - window.innerWidth* (parseFloat(hole.style.left)/100.0);
-			var dy = activeItem.getBoundingClientRect().top - (.9*window.innerHeight) * (parseFloat(hole.style.top)/100.0);
+			    var dy = activeItem.getBoundingClientRect().top - (window.innerHeight) * (parseFloat(hole.style.top)/100.0);
 
 
 			var distance = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2));
-      document.getElementById("DICK").innerHTML = distance;
-			if (distance < 20) { 
+
+			if (distance < 30) { 
         correctSound.play();
         const myRand = () => {
           let r = 50;
@@ -379,6 +401,7 @@ function generateShapes(inputLevel) {
 
         generated.add(item);
         numGenerated = numGenerated + 1;
+
 
         var div = document.createElement('div');
         div.id = item + "_hole";

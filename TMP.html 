@@ -1,0 +1,24 @@
+<html>
+<body>
+<script>
+	var svg = document.createElement('svg'); 
+        svg.id = item + "_hole_container";
+        svg.className = item + "_container";
+        svg.setAttribute("height", "8vw");
+        svg.setAttribute("width", "8vw");
+
+        var shape = document.createElement('circle');
+        shape.setAttribute("cx", "4vw");
+        shape.setAttribute("cy", "4vw");
+        shape.setAttribute("r", "8vw");
+        shape.setAttribute("fill", "green");
+        shape.setAttribute("stroke", "red");
+        shape.setAttribute("stroke-width", "2");
+
+        svg.appendChild(shape);
+</script>
+
+	asdf
+</svg>
+</body>
+</html>
